@@ -1,7 +1,7 @@
 import { generateText } from './aiAdapter.js';
 import { findSimilarPosts } from '../services/vectorSearchService.js';
 
-const RELEVANCE_THRESHOLD = 0.3; // Lenient threshold for hash-based embeddings
+const RELEVANCE_THRESHOLD = 0.5; // Higher threshold to only include truly relevant posts
 
 /**
  * Answers a student's doubt using RAG (Retrieval Augmented Generation).
@@ -14,7 +14,7 @@ const RELEVANCE_THRESHOLD = 0.3; // Lenient threshold for hash-based embeddings
 export async function answerDoubt(question) {
   try {
     // Step 1: Search for relevant community posts
-    const similarPosts = await findSimilarPosts(question, 5);
+    const similarPosts = await findSimilarPosts(question, 2);
 
     // Step 2: Filter by relevance threshold
     const relevantPosts = similarPosts.filter(p => p.score >= RELEVANCE_THRESHOLD);

@@ -22,7 +22,7 @@ export async function findSimilarPosts(queryText, limit = 5) {
             index: 'post_embeddings',
             path: 'embedding',
             queryVector: queryVector,
-            numCandidates: 50,
+            numCandidates: 10,
             limit: limit,
             filter: { moderationStatus: 'approved' }
           }
